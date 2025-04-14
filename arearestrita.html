@@ -9,8 +9,21 @@
 </head>
 <body>
   <header class="topo">
-    <div class="logo">Painel do Usuário</div>
-    <div class="usuario-nome" id="nomeUsuario"></div>
+
+<div id="menuToggle">
+  <input type="checkbox" />
+  <label for="menuToggleInput">
+    <img src="./menu.png" alt="Menu" id="menuIcon">
+  </label>
+
+  <ul id="menu">
+    <a href="./arearestrita.html"><li>Início</li></a>
+    <a href="https://web.facebook.com/profile.php?id=100073682025802"><li>Publicações</li></a>
+    <a href="#editar"><li>Editar Perfil</li></a>
+    <a href="#" onclick="sair()"><li>Sair</li></a>
+  </ul>
+</div>
+
   </header>
 
   <main class="conteudo">
@@ -33,4 +46,104 @@
     <button onclick="sair()">Sair</button>
   </footer>
 </body>
+  <style>#menuToggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1;
+  display: block;
+  width: 30px;
+  height: 25px;
+}
+
+#menuToggle input {
+  display: block;
+  width: 30px;
+  height: 25px;
+  opacity: 0;
+  z-index: 2;
+  cursor: pointer;
+  position: absolute;
+}
+
+#menuToggle span {
+  display: block;
+  width: 30px;
+  height: 4px;
+  margin-bottom: 5px;
+  background: #333;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+#menu {
+  position: fixed;
+  width: 200px;
+  height: 100%;
+  background: #f1f1f1;
+  left: -200px;
+  top: 0;
+  padding: 50px 20px;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  list-style: none;
+}
+
+#menuToggle input:checked ~ ul {
+  left: 0;
+}
+
+#menu a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+  padding: 10px 0;
+  font-weight: bold;
+}
+
+#menu a:hover {
+  background: #ddd;
+  border-radius: 4px;
+}
+</style>
+  <script>
+  const modal = document.getElementById("editarPerfilModal");
+  const btnEditar = document.querySelector('a[href="#editar"]'); // link "Editar Perfil"
+  const spanFechar = document.querySelector(".fechar");
+
+  btnEditar.addEventListener("click", function (e) {
+    e.preventDefault();
+    // Pegar dados do localStorage
+    document.getElementById("editNome").value = localStorage.getItem("nome") || "";
+    document.getElementById("editEmail").value = localStorage.getItem("email") || "";
+    document.getElementById("editData").value = localStorage.getItem("dataNascimento") || "";
+    modal.style.display = "block";
+  });
+
+  spanFechar.onclick = function () {
+    modal.style.display = "none";
+  };
+
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
+
+  function salvarPerfil() {
+    const nome = document.getElementById("editNome").value;
+    const email = document.getElementById("editEmail").value;
+    const data = document.getElementById("editData").value;
+
+    localStorage.setItem("nome", nome);
+    localStorage.setItem("email", email);
+    localStorage.setItem("dataNascimento", data);
+
+    alert("Perfil atualizado com sucesso!");
+    modal.style.display = "none";
+
+
+  }
+</script>
+
 </html>
