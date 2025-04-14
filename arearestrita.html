@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Área Restrita</title>
+  <link rel="stylesheet" href="estilo2.css">
+  <link rel="icon" href="./rest.png" type="image/png">
+  <script src="restrita.js" defer></script>
+</head>
+<body>
+  <header class="topo">
+    <div class="logo">Painel do Usuário</div>
+    <div class="usuario-nome" id="nomeUsuario"></div>
+  </header>
+
+  <main class="conteudo">
+    <section class="perfil">
+      <h2>Informações do Perfil</h2>
+      <p><strong>Nome:</strong> <span id="perfilNome"></span></p>
+      <p><strong>Email:</strong> <span id="perfilEmail"></span></p>
+      <p><strong>Data de Nascimento:</strong> <span id="perfilNascimento"></span></p>
+    </section>
+
+    <section class="publicacoes">
+      <h2>Últimas Publicações</h2>
+      <ul id="listaPublicacoes">
+        <!-- Publicações simuladas serão inseridas aqui -->
+      </ul>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <button onclick="sair()">Sair</button>
+  </footer>
+</body>
+</html>
