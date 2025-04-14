@@ -9,7 +9,7 @@
 </head>
 <body>
   <header class="topo"
-    <div class="logo">Painel do Usuário <a href="#editar">Editar Perfil</a> <a href="https://web.facebook.com/profile.php?id=100073682025802">Publicações</div>
+    <div class="logo">Painel do Usuário <a href="#" onclick="abrirEditorPerfil()"><li>Editar Perfil</li></a> <a href="https://web.facebook.com/profile.php?id=100073682025802">Publicações</div>
     <div class="usuario-nome" id="nomeUsuario"></div>
   </header>
 
@@ -35,44 +35,46 @@
     <button onclick="sair()">Sair</button>
   </footer>
 </body>
-  <style>#menuToggle {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 1000;
-}
+ <div id="perfilBox">
+  <h2>Perfil do Usuário</h2>
+  <p><strong>Nome:</strong> <span id="campoNome">---</span></p>
+  <p><strong>Email:</strong> <span id="campoEmail">---</span></p>
+  <p><strong>Data de Nascimento:</strong> <span id="campoData">---</span></p>
+</div>
 
-#menuIcon {
-  width: 30px;
-  cursor: pointer;
-}
+  <div id="editarPerfilBox" style="display:none; padding:20px; border:1px solid #ccc; background:#eee; margin-top:20px;">
+  <h2>Editar Perfil</h2>
+  <label for="editNome">Nome:</label>
+  <input type="text" id="editNome"><br><br>
+  
+  <label for="editEmail">Email:</label>
+  <input type="email" id="editEmail"><br><br>
+  
+  <label for="editData">Data de Nascimento:</label>
+  <input type="date" id="editData"><br><br>
+  
+  <button onclick="salvarPerfil()">Salvar</button>
+  <button onclick="cancelarEdicao()">Cancelar</button>
+</div>
 
-#menuToggle input {
-  display: none;
 
   <script>
-  const modal = document.getElementById("editarPerfilModal");
-  const btnEditar = document.querySelector('a[href="#editar"]'); // link "Editar Perfil"
-  const spanFechar = document.querySelector(".fechar");
 
-  btnEditar.addEventListener("click", function (e) {
-    e.preventDefault();
-    // Pegar dados do localStorage
+  function atualizarExibicaoPerfil() {
+    document.getElementById("campoNome").innerText = localStorage.getItem("nome") || "---";
+    document.getElementById("campoEmail").innerText = localStorage.getItem("email") || "---";
+    document.getElementById("campoData").innerText = localStorage.getItem("dataNascimento") || "---";
+  }
+
+  function abrirEditorPerfil() {
+    document.getElementById("editarPerfilBox").style.display = "block";
+    
     document.getElementById("editNome").value = localStorage.getItem("nome") || "";
     document.getElementById("editEmail").value = localStorage.getItem("email") || "";
     document.getElementById("editData").value = localStorage.getItem("dataNascimento") || "";
-    modal.style.display = "block";
-  });
-
-  spanFechar.onclick = function () {
-    modal.style.display = "none";
-  };
-
-  window.onclick = function (event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  };
+    
+    window.scrollTo(0, document.body.scrollHeight); // desce até o editor
+  }
 
   function salvarPerfil() {
     const nome = document.getElementById("editNome").value;
@@ -83,11 +85,17 @@
     localStorage.setItem("email", email);
     localStorage.setItem("dataNascimento", data);
 
+    atualizarExibicaoPerfil();
+    document.getElementById("editarPerfilBox").style.display = "none";
     alert("Perfil atualizado com sucesso!");
-    modal.style.display = "none";
-
-
   }
+
+  function cancelarEdicao() {
+    document.getElementById("editarPerfilBox").style.display = "none";
+  }
+
+  // Atualiza na carga da página
+  window.onload = atualizarExibicaoPerfil;
 </script>
 
 </html>
