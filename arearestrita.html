@@ -60,37 +60,7 @@
 
 #menuToggle input {
   display: none;
-}
 
-#menu {
-  position: fixed;
-  top: 0;
-  left: -200px;
-  width: 200px;
-  height: 100%;
-  background: #fff;
-  padding: 60px 20px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
-  transition: left 0.3s ease;
-}
-
-#menuToggle input:checked ~ ul {
-  left: 0;
-}
-
-#menu a {
-  display: block;
-  color: #333;
-  text-decoration: none;
-  padding: 10px 0;
-  font-weight: bold;
-}
-
-#menu a:hover {
-  background: #eee;
-}
-
-</style>
   <script>
   const modal = document.getElementById("editarPerfilModal");
   const btnEditar = document.querySelector('a[href="#editar"]'); // link "Editar Perfil"
