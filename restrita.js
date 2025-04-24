@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
 
   if (!usuario) {
-    alert("Acesso negado! Faça login primeiro.");
-    window.location.href = "login.html";
+    alert("Cadastra-se ou Faça login primeiro.");
+    window.location.href = "index.html";
     return;
   }
 
